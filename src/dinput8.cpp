@@ -69,6 +69,7 @@ static void load_mods() noexcept {
     auto mods_path = fs::path(dir).parent_path() / "mods";
 
     if(!fs::exists(mods_path)) {
+        std::cerr << "[MOON] Mods directory does not exists" << std::endl;
         return;
     }
 
