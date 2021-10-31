@@ -35,7 +35,6 @@ WINAPI BOOL DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
         }
         case DLL_PROCESS_DETACH: {
             if(dinput8 != NULL) {
-                unload_mods();
                 FreeLibrary(dinput8);
             }
             
