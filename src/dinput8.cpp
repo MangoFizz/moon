@@ -76,19 +76,20 @@ static void load_mods() noexcept {
     for(auto &dll : fs::directory_iterator(mods_path)) {
         auto dll_path = dll.path();
         if(dll_path.extension() == ".dll") {
-            std::string filename = dll_path.filename().string();
+            auto filename = dll_path.stem().string();
             auto *handle = LoadLibraryW(dll_path.c_str());
+            
+            std::cout << "[MOON] Loading " << filename << "... ";
+            
             if(handle) {
                 mods.insert({filename, handle});
-                std::cout << "[MOON] Loaded " << filename << std::endl;
+                std::cout << "Done" << std::endl;
             }
             else {
-                std::cerr << "[MOON] Failed to load " << filename << std::endl;
+                std::cout << "Failed" << std::endl;
             }
         }
     }
-
-    std::cout << "[Moon] Loaded " << std::to_string(mods.size()) << " mods" << std::endl;
 }
 
 static void unload_mods() noexcept {
